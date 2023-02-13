@@ -1,13 +1,29 @@
 :root{
-    --color1: #6F38C5;
-    --color2: #87A2FB;
-    --color3: #ADDDD0;
-    --color4: #EEEEEE;
+    --color1: #d90368;
+    --color2: #6F38C5;
+    --color3: #87A2FB;
+    --color4: #ADDDD0;
+    --color5: #EEEEEE;
 }
 
 nav{
-    background-color: var(--color3);
+    background-color: var(--color5);
 }
 body{
-    background-color: var(--color4);
+    background-color: var(--color3);
+}
+
+nav li{
+    padding: 0rem 1rem;
+}
+
+.nav-link{
+    border: solid var(--color1) 0.17em;
+    color: var(--color1);
+    border-radius: 8%;
+    font-weight:600;
+}
+
+.navbar-brand{
+padding-left: 2em;
 }
