@@ -1,16 +1,44 @@
 :root{
     --color1: #d90368;
-    --color2: #6F38C5;
-    --color3: #87A2FB;
-    --color4: #ADDDD0;
-    --color5: #EEEEEE;
+    --color2: #639AA6;
+    --color3: #306073;
+    --color4: #F2F0EB;
+    --color5: #96cfdb;
+    --color6: #d49696;
+    --color7: #6F38C5;
+    --color8: #87A2FB;
+    --color9: #ADDDD0;
+    --color10: #EEEEEE;
 }
 
-nav{
-    background-color: var(--color5);
-}
 body{
-    background-color: var(--color3);
+    background-color: var(--color5);
+    font-family: "Poppins", sans-serif;
+}
+
+h1{
+    font-weight: bolder;
+    color: var(--color1);
+}
+.banner{
+    background-color: var(--color2);
+    display: flex;
+    justify-content: space-between;
+    padding: 4rem;
+}
+
+.flecha{
+    width: 5em;
+    color: var(--color4);
+}
+
+
+.flecha:hover{
+background-color: var(--color3);
+}
+
+nav.navbar{
+    background-color: var(--color3) !important;
 }
 
 nav li{
@@ -18,12 +46,47 @@ nav li{
 }
 
 .nav-link{
-    border: solid var(--color1) 0.17em;
-    color: var(--color1);
-    border-radius: 8%;
+    border: solid var(--color4) 0.17em;
+    color: var(--color4);
+    border-radius: 10%;
     font-weight:600;
 }
 
 .navbar-brand{
-padding-left: 2em;
+padding:0em 2em;
 }
+
+.card-title{
+    font-weight:bolder;
+}
+.btn-outline-light{
+    width: 2.5em;
+    border-radius: 50%;
+}
+
+.contacto{
+    min-width: 25em;
+}
+
+table{
+    border-color: var(--color3) !important;
+}
+th{
+  font-style:italic;
+  font-weight: normal;
+}
+
+.tabla-titulo{
+    font-weight: bolder;
+    background-color: var(--color3) !important;
+    color: var(--color4);
+}
+
+.card .btn{
+    background-color: var(--color2) ;
+}
+
+footer{
+    background-color: var(--color3);
+}
+
