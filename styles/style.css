@@ -17,6 +17,7 @@ body {
     background-image: url(../assets/AdobeStock_142590964.jpeg);
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    width: 100vw;
     display:flex;
     flex-direction:column;
     justify-content: flex-start;
@@ -72,13 +73,14 @@ h1 {
 .banner {
     display: flex;
     justify-content: space-between;
-    padding: 3rem;
+    padding: 3rem 0;
 }
 
 .flecha {
     width: 5em;
     color: var(--color4);
 }
+
 
 
 .nav-link:hover, .busqueda:hover, .flecha:hover {
@@ -108,9 +110,6 @@ nav li {
 }
 
 
-.navbar-brand {
-    padding: 0em 2em;
-}
 
 .navbar-nav{
  align-items: center;
@@ -151,6 +150,11 @@ nav li {
     box-shadow: 
     0 0 3px var(--color11),
     0 0 7px var(--color2);
+    text-align: justify;
+}
+
+.precio{
+    color: var(--color2);
 }
 
 .border-bottom{
@@ -172,9 +176,7 @@ textarea{
     color: var(--color11) !important;
 }
 
-.contacto {
-    min-width: 25em;
-}
+
 
 table {
     border-color: #ffa500 !important;
@@ -249,6 +251,9 @@ footer {
 
 .form-check-label{
     padding-bottom: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+   
  
 }
 
@@ -264,12 +269,18 @@ footer {
     flex-direction: row !important;
 }
 
+
 input[type="checkbox"]:checked{
     background-color: var(--color3) !important;
   }
 
+.imput-group{
+    margin-left: auto;
+}
 
-
-@media only screen and (max-width: 780px) {
-  
+@media only screen and (max-width: 375px) {
+        h1{
+            font-size: 3rem;
+        }
     }
+
