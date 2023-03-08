@@ -4,7 +4,7 @@ function crearEventos(datos) {
         textoHTML +=
             `<div class="col">
         <div class="card h-100">
-    <img src=${dato.image} class="card-img-top p-3 embed-responsive-item" alt="music concert">
+    <img src=${dato.image} class="card-img-top p-3 embed-responsive-item" alt="${dato.name}">
     <div class="card-body">
         <h5 class="card-title text-center">${dato.name}</h5>
         <p class="card-text text-center">${dato.description}</p>
@@ -27,9 +27,9 @@ function crearCheckbox(datos) {
     listCategorias.forEach(c => {
         textoHTML +=
         `
-        <div class="input-group flex-fill">
+        <div class="input-group flex-fill check">
         <label for="${c}" class="form-check-label">
-            <input type="checkbox" class="form-check-input mt-0" name="${c}"
+            <input type="checkbox" class="form-check-input mt-0" name="category"
                 value="${c}">
                 ${c}
         </label>
@@ -38,7 +38,20 @@ function crearCheckbox(datos) {
     return textoHTML;
 }
 
-function buscarEventos(checkList, eventos) {
+function buscarEventos(text, eventos, checkboxes){
+    let eventosFinales= [];
+    let eventosXCategoria = eventos.filter(ev => checkboxes.includes(ev.category));
+    if (eventosXCategoria.length > 0) {
+        eventosFinales = eventosXCategoria.filter(ev => ev.name.toLowerCase().includes(text) ||
+        ev.description.toLowerCase().includes(text)); 
+    } else {
+        eventosFinales = eventos.filter(ev => ev.name.toLowerCase().includes(text) ||
+        ev.description.toLowerCase().includes(text));
+    }
+
+    return eventosFinales.length > 0 ? 
+    crearEventos(eventosFinales) :
+     "<h5 class='aviso'>No hay resultados disponibles, intente con otra búsqueda</h5>";
 }
 
 function verDetalle(id) {

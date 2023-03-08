@@ -29,3 +29,8 @@ textHTML = `<div class="row">
 </div>`;
 
 container.innerHTML = textHTML;
+
+
+const btnVolver = document.getElementsByClassName("volver")[0];
+
+btnVolver.addEventListener("click", () => window.history.back());
