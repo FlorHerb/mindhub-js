@@ -63,9 +63,9 @@
     </header>
 
     <main>
-        <div class="container">
+        <div class="container cont-table">
 
-            <table class="table table-bordered mt-5 mb-5">
+            <table class="table table-bordered mt-5 mb-5 text-center table-responsive table-responsive-sm">
                 <thead>
                     <tr>
                         <th class="text-center tabla-titulo" colspan="3">Event Statistics</th>
@@ -76,16 +76,12 @@
                         <th scope="col">Event with larger capacity</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
-                    </tr>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
+                <tbody id="event stats">
+
+                    <tr class="text-center">
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
                     </tr>
                 </tbody>
 
@@ -95,27 +91,19 @@
                         <th class="text-center tabla-titulo" colspan="3">Upcoming events statistics by category</th>
                     </tr>
                     <tr>
-                        <th scope="col">Categories</th>
-                        <th scope="col">Revenues</th>
-                        <th scope="col">Percentage of attendance</th>
+                        <th scope="col"><b>Categories</b></th>
+                        <th scope="col"><b>Revenues</b></th>
+                        <th scope="col"><b>Percentage of attendance</b></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
+                <tbody id="upcoming events">
+
+                    <tr class="text-center">
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
                     </tr>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
-                    </tr>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
-                    </tr>
+
                 </tbody>
 
 
@@ -124,26 +112,17 @@
                         <th class="text-center tabla-titulo" colspan="3">Past events statistics by category</th>
                     </tr>
                     <tr>
-                        <th scope="col">Categories</th>
-                        <th scope="col">Revenues</th>
-                        <th scope="col">Percentage of attendance</th>
+                        <th scope="col"><b>Categories</b></th>
+                        <th scope="col"><b>Revenues</b></th>
+                        <th scope="col"><b>Percentage of attendance</b></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
-                    </tr>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
-                    </tr>
-                    <tr>
-                        <td>event</td>
-                        <td>event</td>
-                        <td>event</td>
+                <tbody id="past events">
+
+                    <tr class="text-center">
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
+                        <td class="fa-3x loading"><i class="fas fa-circle-notch fa-spin text-white"></i></td>
                     </tr>
                 </tbody>
             </table>
@@ -158,7 +137,7 @@
     </main>
 
     <footer class="text-center text-white">
-        <div class="d-flex flex-row p-2 justify-content-between me-5 ms-5">
+        <div class="d-flex flex-row p-2 justify-content-between">
             <section>
                 <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button"
                     target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -169,7 +148,7 @@
                 <a class="btn btn-outline-light m-1" href="https://web.whatsapp.com/" role="button" target="_blank"><i
                         class="fab fa-whatsapp"></i></a>
             </section>
-            <p class="pt-2">
+            <p class="pt-2 pe-2">
                 Cohorte 9
             </p>
         </div>
@@ -182,6 +161,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
+        <script src="./scripts/functions.js"></script>
+        <script src="./scripts/stats.js"></script>
 </body>
 
 </html>

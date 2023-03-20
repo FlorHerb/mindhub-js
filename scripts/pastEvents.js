@@ -1,34 +1,53 @@
 const contenedor = document.getElementById("rowCards");
-const eventosPasados = data.events.filter(evento => evento.date < data.currentDate);
+//const eventosPasados = data.events.filter(evento => evento.date < data.currentDate);
 let checkeados = [];
-
-contenedor.innerHTML = crearEventos(eventosPasados);
-
-const listaCheckbox= document.getElementById("collapse2");
-listaCheckbox.innerHTML= crearCheckbox(eventosPasados);
-
+let eventosPasados = [];
+let checkboxes = [];
+const listaCheckbox = document.getElementById("collapse2");
 const textBuscar = document.getElementById("textBuscar");
-
 const btnBuscar = document.getElementById("btnBuscar");
-btnBuscar.addEventListener("click", (e) => { 
-    e.preventDefault();
-    contenedor.innerHTML = buscarEventos(textBuscar.value.toLowerCase(), eventosPasados, checkeados);
+const loading = document.getElementById("loading");
+
+traerEventos();
+
+function traerEventos() {
+  loading.style.display = "block";
+  //fetch("./events.json")
+  fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(response => response.json())
+    .then(datos => {
+      eventosPasados = datos.events;
+      eventosPasados = eventosPasados.filter(evento => evento.date < datos.currentDate);
+      contenedor.innerHTML = crearEventos(eventosPasados);
+      listaCheckbox.innerHTML = crearCheckbox(eventosPasados);
+
+      checkboxes = document.getElementsByName("category");
+
+      checkboxes.forEach(check => {
+        check.addEventListener("change", () => {
+          let text = textBuscar.value.toLowerCase();
+          checkeados = Array.from(checkboxes).filter(ch => ch.checked).map(ch => ch.value);
+          contenedor.innerHTML = buscarEventos(text, eventosPasados, checkeados);
+        })
+      })
+      loading.style.display = "none";
+
+    }).catch(error => console.log(error.message))
+}
+
+
+
+btnBuscar.addEventListener("click", (e) => {
+  e.preventDefault();
+  contenedor.innerHTML = buscarEventos(textBuscar.value.toLowerCase(), eventosPasados, checkeados);
 });
 
 textBuscar.addEventListener("keyup", () => {
-    let text = textBuscar.value.toLowerCase();
-    contenedor.innerHTML = buscarEventos(text, eventosPasados, checkeados);
+  let text = textBuscar.value.toLowerCase();
+  contenedor.innerHTML = buscarEventos(text, eventosPasados, checkeados);
 })
 
-const checkboxes = document.getElementsByName("category");
 
-checkboxes.forEach(check => {
-    check.addEventListener("change", () => {
-        let text = textBuscar.value.toLowerCase();
-        checkeados = Array.from(checkboxes).filter(ch => ch.checked).map(ch => ch.value);
-       contenedor.innerHTML = buscarEventos(text, eventosPasados, checkeados);
-    })
-})
 
 let btnSubir = document.getElementById("btn-subir");
 
