@@ -12,17 +12,17 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
     .then(datos => {
         let eventos = datos.events;
 
-        calcularEstadisticas(eventos);
-        calcularUpcoming(eventos.filter(evento => evento.date > datos.currentDate));
-        calcularPast(eventos.filter(evento => evento.date < datos.currentDate));
+        calcularEstadisticasGeneral(eventos);
+        calcularEventos(eventos.filter(evento => evento.date > datos.currentDate), eventStatsUpcoming);
+        calcularEventos(eventos.filter(evento => evento.date < datos.currentDate), eventStatsPast);
 
         Array.from(loading).forEach(element => {
             element.style.display = "none";
         });
-    }).catch(error => console.log(error.message))
+    }).catch(error => console.log(error.message));
 
 
-function calcularEstadisticas(eventos) {
+function calcularEstadisticasGeneral(eventos) {
     let textHTML = '';
     let highAttendance = { id: 0, name: '', percentage: 0 };
     let lowAttendance = { id: 0, name: '', percentage: 100 };
@@ -35,7 +35,6 @@ function calcularEstadisticas(eventos) {
             largerCapacity.capacity = ev.capacity;
         }
         if (ev.hasOwnProperty('assistance')) {
-            //let percentage = ev.assistance * 100 / ev.capacity;
             let percentage = (ev.assistance / ev.capacity) * 100;
             if (percentage > highAttendance.percentage) {
                 highAttendance.id = ev._id;
@@ -61,11 +60,9 @@ function calcularEstadisticas(eventos) {
 }
 
 
+function calcularEventos(eventos, contenedor) {
 
-
-function calcularUpcoming(eventos) {
-
-    let calcPorCategoria = calcularEventos(eventos);
+    let calcPorCategoria = calcularEstadisticas(eventos);
     let textHTML = '';
 
     calcPorCategoria.forEach(calc => {
@@ -73,43 +70,25 @@ function calcularUpcoming(eventos) {
     <tr>
         <td>${calc.category}</td>
         <td>$ ${calc.revenue}</td>
-        <td>${((calc.asistencia/calc.capacity)*100).toFixed(2)} %</td>
+        <td>${((calc.asistencia / calc.capacity) * 100).toFixed(2)} %</td>
     <tr>
     `
     });
-
-    eventStatsUpcoming.innerHTML = textHTML;
+    contenedor.innerHTML = textHTML;
 }
 
-function calcularPast(eventos) {
 
-    let calcPorCategoria = calcularEventos(eventos);
-    let textHTML = '';
+function calcularEstadisticas(eventos) {
 
-    calcPorCategoria.forEach(calc => {
-        textHTML += `
-      <tr>
-          <td>${calc.category}</td>
-          <td>$ ${calc.revenue} </td>
-          <td>${((calc.asistencia/calc.capacity)*100).toFixed(2)} %</td>
-      <tr>
-      `
-    });
-
-    eventStatsPast.innerHTML = textHTML;
-}
-
-function calcularEventos(eventos) {
-    
     const events = eventos.map(ev => {
         let eventoCalculado = {};
         let asistencia = ev.assistance ? ev.assistance : ev.estimate;
         let revenue = ev.price * asistencia;
-        eventoCalculado = { category: ev.category, revenue: revenue, asistencia:asistencia, capacity: ev.capacity }
+        eventoCalculado = { category: ev.category, revenue: revenue, asistencia: asistencia, capacity: ev.capacity }
         return eventoCalculado;
     });
 
-    const categories = events.reduce((acum, item) => {
+    const categ = events.reduce((acum, item) => {
         if (acum[item.category]) {
             acum[item.category].revenue = acum[item.category].revenue + item.revenue;
             acum[item.category].asistencia = acum[item.category].asistencia + item.asistencia;
@@ -120,38 +99,6 @@ function calcularEventos(eventos) {
         return acum
     }, {});
 
-    const categoriesAvg = Object.values(categories).map(({ ...item }) => {
-        return { ...item};
-    });
-
-
-    /* const events = eventos.map(ev => {
-        let eventoCalculado = {};
-        let asistencia = ev.assistance ? ev.assistance : ev.estimate;
-        let revenue = ev.price * asistencia;
-        let percentage = (asistencia / ev.capacity) * 100;
-        eventoCalculado = { category: ev.category, revenue: revenue, percentage: percentage }
-        return eventoCalculado;
-    });
-
-    const categories = events.reduce((acum, item) => {
-        if (acum[item.category]) {
-            acum[item.category].revenue = acum[item.category].revenue + item.revenue;
-            acum[item.category].percentage = acum[item.category].percentage + item.percentage;
-            acum[item.category].contador = acum[item.category].contador + 1;
-        } else {
-            acum[item.category] = item;
-            acum[item.category].contador = 1;
-
-        }
-        return acum
-    }, {});
-
-    const categoriesAvg = Object.values(categories).map(({ ...item }) => {
-        return { ...item, percentage: (item.percentage / item.contador).toFixed(2) };
-    }); */
-
-    //return categoriesAvg.sort((a, b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
-
-    return categoriesAvg.sort((a, b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
+    const categories = Object.values(categ);
+    return categories.sort((a, b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
 }
